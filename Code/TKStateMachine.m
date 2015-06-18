@@ -57,6 +57,7 @@ static NSString *TKQuoteString(NSString *string)
 @property (nonatomic, strong) NSMutableSet *mutableEvents;
 @property (nonatomic, assign, getter = isActive) BOOL active;
 @property (nonatomic, strong, readwrite) TKState *currentState;
+@property (nonatomic, strong, readwrite) TKTransition *mostRecentTransition;
 @end
 
 @implementation TKStateMachine
@@ -236,6 +237,7 @@ static NSString *TKQuoteString(NSString *string)
                                                   TKStateMachineDidChangeStateNewStateUserInfoKey: newState,
                                                   TKStateMachineDidChangeStateEventUserInfoKey: event }];
     [[NSNotificationCenter defaultCenter] postNotificationName:TKStateMachineDidChangeStateNotification object:self userInfo:notificationInfo];
+    self.mostRecentTransition = transition;
     
     return YES;
 }

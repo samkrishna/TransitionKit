@@ -20,7 +20,7 @@
 
 #import <Foundation/Foundation.h>
 
-@class TKEvent, TKState;
+@class TKEvent, TKState, TKTransition;
 
 /**
  The `TKStateMachine` class provides an interface for modeling a state machine. The state machine supports the registration of an arbitrary number of states and events that trigger transitions between the states.
@@ -72,9 +72,19 @@
  
  When the machine is activated, the current state transitions from `nil` to the `initialState`. Subsequent state transitions are trigger by the firing of events.
  
- @see `fireEvent:error:`
+ @see `fireEvent:userInfo:error:`
  */
 @property (nonatomic, strong, readonly) TKState *currentState;
+
+
+/**
+ The most recent transition of the receiver.
+ 
+ When the machine fires an event, the transition object is stored at this property to provide introspection into the transition by objects using the machine. This property is nil at activation.
+
+ @see `TKTransition`
+ */
+@property (nonatomic, strong, readonly) TKTransition *mostRecentTransition;
 
 /**
  Adds a state to the receiver.
