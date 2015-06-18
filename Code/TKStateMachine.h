@@ -80,7 +80,7 @@
 /**
  The most recent transition of the receiver.
  
- When the machine fires an event, the transition object is stored at this property to provide introspection into the transition by objects using the machine. This property is nil at activation.
+ After the machine completes the event-firing lifecycle, the transition object is stored at this property. This property is nil at activation.
 
  @see `TKTransition`
  */
